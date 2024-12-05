@@ -15,8 +15,9 @@ public class Main {
         System.out.println("4 - Средний балл");
         System.out.println("5 - Какие цифры встречаются в тексте?");
         System.out.println("6 - Проверка равенства участка очереди");
-        System.out.println("7 - Стрим ");
-        System.out.println("8 - Номер ");
+        System.out.println("7 - Стрим");
+        System.out.println("8 - Номер");
+        System.out.println("0 - Выход");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
