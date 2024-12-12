@@ -15,9 +15,8 @@ public class Main {
         System.out.println("4 - Средний балл");
         System.out.println("5 - Какие цифры встречаются в тексте?");
         System.out.println("6 - Проверка равенства участка очереди");
-        System.out.println("7 - Стрим");
-        System.out.println("8 - Номер");
-        System.out.println("0 - Выход");
+        System.out.println("7 - Стрим ");
+        System.out.println("8 - Номер ");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -28,7 +27,7 @@ public class Main {
                 return;
 
             case 1:
-                System.out.println("Введите дробь через пробел: (числитель знаменатель)");
+                System.out.println("Введите первую дробь: (числитель и знаменатель)");
                 while (!scanner.hasNextInt()) { // Проверка на ввод числа
                     System.out.print("Ошибка! Введите целое число: ");
                     scanner.next(); // Очистка ввода
@@ -39,20 +38,22 @@ public class Main {
                     scanner.next(); // Очистка ввода
                 }
                 int d1 = scanner.nextInt();
-                Fraction fraction1 = new Fraction(c, d1);
+
+                // Создаем экземпляр CachedFraction
+                CachedFraction fraction1 = new CachedFraction(c, d1);
                 System.out.println("Полученная дробь: " + fraction1);
-                System.out.println("Десятичный вид дроби: " + fraction1.toDouble());
+                System.out.println("Десятичный вид дроби: " + fraction1.getValue());
 
                 // Изменяем дробь
                 System.out.print("Введите новый числитель: ");
-                while (!scanner.hasNextInt()) {
+                while (!scanner.hasNextInt()) { // Проверка на ввод числа
                     System.out.print("Ошибка! Введите целое число: ");
                     scanner.next(); // Очистка ввода
                 }
                 int c1 = scanner.nextInt();
                 fraction1.setNumerator(c1); // Меняем числитель дроби
                 System.out.println("Новая дробь: " + fraction1);
-                System.out.println("Десятичный вид дроби: " + fraction1.toDouble());
+                System.out.println("Десятичный вид дроби: " + fraction1.getValue());
 
                 System.out.print("Введите новый знаменатель: ");
                 while (!scanner.hasNextInt()) { // Проверка на ввод числа
@@ -62,8 +63,9 @@ public class Main {
                 int d2 = scanner.nextInt();
                 fraction1.setDenominator(d2); // Меняем знаменатель
                 System.out.println("Новая дробь: " + fraction1);
-                System.out.println("Десятичный вид дроби: " + fraction1.toDouble()); // Вывод 10-й дроби
+                System.out.println("Десятичный вид дроби: " + fraction1.getValue());
                 break;
+
 
             case 2:
                 List<MeowCounter> counters = new ArrayList<>(); // Список счетчиков котов
@@ -304,7 +306,7 @@ public class Main {
 
                     if (coordinates.length != 2) {
                         System.out.println("Неверный формат. Пожалуйста, введите координаты в формате 'X Y'.");
-                        i--; // Уменьшаем счетчик, чтобы повторно запросить ввод для этой точки
+                        i--; // Уменьшаем счётчик, чтобы повторно запросить ввод для этой точки
                         continue;
                     }
 
@@ -314,7 +316,7 @@ public class Main {
                         points.add(new Point(x, y));
                     } catch (NumberFormatException e) {
                         System.out.println("Ошибка ввода. Пожалуйста, введите числовые координаты.");
-                        i--; // Уменьшаем счетчик, чтобы повторно запросить ввод для этой точки
+                        i--;
                     }
                 }
 
@@ -324,10 +326,7 @@ public class Main {
                         .map(point -> new Point(point.getX(), Math.abs(point.getY()))) // Делаем Y положительными
                         .sorted(Comparator.comparingDouble(Point::getX)) // Сортируем по X
                         .collect(Collectors.toList())); // Собираем в список
-
-                System.out.println(polyline); // Выводим результат
-
-                System.out.println(); // Оставляем пустую строку для красоты
+                System.out.println(polyline);
                 break;
             case 8:
                 PersonProcessor processor = new PersonProcessor();
@@ -348,3 +347,4 @@ public class Main {
         }
         }
     }
+
