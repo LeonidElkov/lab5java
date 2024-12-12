@@ -1,16 +1,19 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class QueueEqualityChecker {
-    private Queue<Integer> queue;
+// Класс для проверки равенства элементов в очереди
+public class QueueEqualityChecker<T> {
+    private Queue<T> queue;
     private int startIndex;
     private int endIndex;
 
-    public QueueEqualityChecker(Queue<Integer> queue, int startIndex, int endIndex) {
-        this.queue = queue;
-        setIndices(startIndex, endIndex);
+    // Конструктор, инициализирующий очередь и индексы
+    public QueueEqualityChecker(Queue<T> queue, int startIndex, int endIndex) {
+        this.queue = queue; // Инициализация очереди
+        setIndices(startIndex, endIndex); // Установка индексов
     }
 
+    // Установка индексов
     public void setIndices(int startIndex, int endIndex) {
         if (startIndex < 0 || endIndex >= queue.size() || startIndex >= endIndex) {
             throw new IllegalArgumentException("Неверные индексы: " + startIndex + ", " + endIndex);
@@ -19,21 +22,22 @@ public class QueueEqualityChecker {
         this.endIndex = endIndex;
     }
 
+    // Проверка равенства элементов в заданном диапазоне индексов
     public boolean checkEquality() {
-        Queue<Integer> tempQueue = new LinkedList<>(queue);
-        Integer firstElement = null;
+        Queue<T> tempQueue = new LinkedList<>(queue); // Временная очередь
+        T firstElement = null; // Первый элемент для сравнения
 
         for (int index = 0; index <= endIndex; index++) {
-            Integer currentElement = tempQueue.poll();
+            T currentElement = tempQueue.poll(); // Извлечение элемента
             if (index == startIndex) {
-                firstElement = currentElement;
+                firstElement = currentElement; // Сохранение первого элемента
             } else if (index >= startIndex && index <= endIndex) {
                 if (!currentElement.equals(firstElement)) {
-                    return false;
+                    return false; // Элементы не равны
                 }
             }
         }
-        return true;
+        return true; // Все элементы равны
     }
 
     @Override
